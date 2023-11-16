@@ -1,11 +1,16 @@
+/*
+    Redacted code base, switching to GUI in a future
+    DO NOT TOUCH THIS CODE, THESE ARE OLD AND ARE ONLY
+    USED IN PRESENTING THE FUNCTIONALITY OF THE PROJECT
+*/
 import java.util.Scanner;
 public class IET extends IET_QOL{
     static IET_COLLECTIONS col = new IET_COLLECTIONS();
     static Scanner scan = new Scanner(System.in);
-    public static void main(String[] args) {
-        col.InitStudents();
-        Menu();
-    }
+    // public static void main(String[] args) {
+    //     col.InitStudents();
+    //     Menu();
+    // }
     public static void Menu(){
         String[] menu_option = new String[]{"TRACK","DISPLAY","EXIT"};
         int option = 1;

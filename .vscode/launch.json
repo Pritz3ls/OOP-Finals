@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Test_GUI",
+            "request": "launch",
+            "mainClass": "Test_GUI",
+            "projectName": "OOP-Finals_86c04dac"
+        },
+        {
+            "type": "java",
+            "name": "GUI",
+            "request": "launch",
+            "mainClass": "GUI",
+            "projectName": "OOP-Finals_86c04dac"
+        },
+        {
+            "type": "java",
             "name": "GUI",
             "request": "launch",
             "mainClass": "GUI",

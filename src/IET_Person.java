@@ -17,6 +17,7 @@ public class IET_Person extends IET_VIOLATIONCODE{
     public String RetrieveSRCODE(){
         return _SRCODE;
     }
+    // REDACTED
     public void RetrieveInfo(){
         System.out.println("NAME: " + _FULLNAME);
         System.out.println("SECTION: " + _SECTION);
