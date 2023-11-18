@@ -2,12 +2,9 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-
 public class IET_COLLECTIONS{
     static Boolean isAdmin = false;
+    static String GLOBAL_USERNAME = "admin", GLOBAL_PASSWORD = "admin";
     static ArrayList<String> _entryAM = new ArrayList<String>();
     static ArrayList<String> _entryPM = new ArrayList<String>();
     
