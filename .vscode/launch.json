@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "IET",
+            "request": "launch",
+            "mainClass": "IET",
+            "projectName": "OOP-Finals_86c04dac"
+        },
+        {
+            "type": "java",
+            "name": "GUI",
+            "request": "launch",
+            "mainClass": "GUI",
+            "projectName": "OOP-Finals_86c04dac"
+        },
+        {
+            "type": "java",
             "name": "GUI",
             "request": "launch",
             "mainClass": "GUI",

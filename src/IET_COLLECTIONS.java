@@ -2,11 +2,16 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
 public class IET_COLLECTIONS{
+    static Boolean isAdmin = false;
     static ArrayList<String> _entryAM = new ArrayList<String>();
     static ArrayList<String> _entryPM = new ArrayList<String>();
     
-//    Testing Purposes
+    // Testing Purposes
     static ArrayList<IET_Person> students = new ArrayList<IET_Person>();
     
     public void Add(int indx, String srcode){
@@ -34,7 +39,7 @@ public class IET_COLLECTIONS{
         }
         return verification;
     }
-//    Testing Purposes
+    // Testing Purposes
     public void InitStudents(){
         students.add(new IET_Person("Prince Guerrero", "2104", "22-32507"));
         students.add(new IET_Person("Marlou Espenada", "2104", "24-13120"));

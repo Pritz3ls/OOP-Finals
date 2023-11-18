@@ -1,64 +1,85 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-class GUI extends IET_COLLECTIONS{
-    // public static void main(String args[]){
-    //     Start_GUI();
-    // }
-    
-    public static void Start_GUI(){
-        JFrame frame = new JFrame("IET - Institutional Entry Tracker");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(400,400));
-        frame.setMaximumSize(new Dimension(400,400));
-        frame.setResizable(false);
-        
-        //#region ACTION-PANEL-PARENT
-            JPanel actionPANEL_Parent = new JPanel();
-            actionPANEL_Parent.setBackground(Color.gray);
-            actionPANEL_Parent.setMaximumSize(new Dimension(400,20));
-        //#endregion
-        //#region DETAIL-PANEL-PARENT
-            JPanel detailPANEL_Parent = new JPanel();
-            detailPANEL_Parent.setBackground(Color.red);
-            detailPANEL_Parent.setMaximumSize(new Dimension(400,330));
-            //#region DETAILS-PANEL
-                JPanel detailPANEL = new JPanel();
-                JLabel person_info = new JLabel("22-32507 : PRINCE MARCO GUERRERO : 23-08-31 : 12:00 PM");
-                detailPANEL.add(person_info);
-            //#endregion
-            detailPANEL.setVisible(false);
-            detailPANEL_Parent.add(detailPANEL);
-        //#endregion
-        //#region TRACK-PANEL-PARENT
-            JPanel trackPANEL_Parent = new JPanel();
-            trackPANEL_Parent.setBackground(Color.gray);
-            trackPANEL_Parent.setMaximumSize(new Dimension(400, 50));
-            JLabel trackLABEL = new JLabel("Enter SR-CODE");
-            JTextField trackTF = new JTextField(10);
-            JButton trackBUTTON = new JButton("Enter");
-            trackBUTTON.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e){
-                    Testing(trackTF.getText());
-                    trackTF.setText("");
-                }
-            });
-            trackPANEL_Parent.add(trackLABEL);
-            trackPANEL_Parent.add(trackTF);
-            trackPANEL_Parent.add(trackBUTTON);
-        //#endregion
-        JPanel wholePANEL = new JPanel();
-        wholePANEL.setLayout(new BoxLayout(wholePANEL, BoxLayout.Y_AXIS));
-        wholePANEL.add(actionPANEL_Parent);
-        wholePANEL.add(detailPANEL_Parent);
-        wholePANEL.add(trackPANEL_Parent);
-        
-        // frame.getContentPane().add(BorderLayout.NORTH, MenuBar);
-        frame.add(wholePANEL);
-        // frame.getContentPane().add(BorderLayout.CENTER, detailPANEL);
-        frame.setVisible(true);
+class IET_GUI extends IET_COLLECTIONS{
+    public static JFrame ADMIN_MENU = new JFrame();
+    public static JFrame TRACK_MENU = new JFrame();
+    public static JFrame DISPLAY_MENU = new JFrame();
+    static int GLOBAL_RES_WIDTH = 1024;
+    static int GLOBAL_RES_HEIGHT = 1024;
+
+    // Build the MainMenu panel including the elements inside
+    public static void BUILD_FRAMES(){
+        BUILD_MAINMENU();
+
+        ACTIVATE_FRAMES(1);
     }
-    public static void Testing(String name){
-        System.out.println(name);
+    public static void BUILD_MAINMENU(){
+        ADMIN_MENU.setSize(new Dimension(GLOBAL_RES_WIDTH, GLOBAL_RES_HEIGHT));
+        ADMIN_MENU.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ADMIN_MENU.setResizable(false);
+        
+        JPanel ADMIN = new JPanel();
+        // ADMIN.setLayout(new BoxLayout(ADMIN, BoxLayout.Y_AXIS));
+        ADMIN.setBackground(Color.red);
+        JTextField _username = new JTextField("Username",10);
+        JTextField _password = new JTextField("Password",10);
+        JButton _submit = new JButton("Submit");
+        _submit.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                System.out.println("Welcome");
+            }
+        });
+        ADMIN.add(_username);
+        ADMIN.add(_password);
+        ADMIN.add(_submit);
+        ADMIN_MENU.add(ADMIN);
+    }
+    public static void BUILD_TRACKMENU(){}
+    public static void BUILD_DISPLAYMENU(){}
+    
+    public static JMenuBar ADD_MENUBAR(){
+        JMenuBar MENUBAR = new JMenuBar();
+        MENUBAR.setBackground(Color.gray);
+        JMenu MB_ACTIONBAR = new JMenu("Actions");
+        JMenuItem MB_TRACK = new JMenuItem("Track");
+        JMenuItem MB_DISPLAY = new JMenuItem("Display");
+        JMenuItem MB_EXIT = new JMenuItem("Exit");
+        
+        MB_TRACK.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                ACTIVATE_FRAMES(0);
+            }
+        });
+        MB_DISPLAY.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                ACTIVATE_FRAMES(1);
+            }
+        });
+        MB_EXIT.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                ACTIVATE_FRAMES(2);
+            }
+        });
+
+        MB_ACTIONBAR.add(MB_TRACK);
+        MB_ACTIONBAR.add(MB_DISPLAY);
+        MB_ACTIONBAR.add(MB_EXIT);
+        
+        MENUBAR.add(MB_ACTIONBAR);
+
+        return MENUBAR;
+    }
+    public static void ACTIVATE_FRAMES(int frame_id){
+        JFrame TEMP;
+        if(!isAdmin){
+            TEMP = ADMIN_MENU;
+            TEMP.setVisible(true);
+            return;
+        }
+        if(frame_id != 2){
+            TEMP = frame_id == 1 ? TRACK_MENU : DISPLAY_MENU;
+            TEMP.setVisible(true);
+        }
     }
 }
