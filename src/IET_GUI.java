@@ -5,6 +5,7 @@ class GUI extends IET_COLLECTIONS{
     // public static void main(String args[]){
     //     Start_GUI();
     // }
+    
     public static void Start_GUI(){
         JFrame frame = new JFrame("IET - Institutional Entry Tracker");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
