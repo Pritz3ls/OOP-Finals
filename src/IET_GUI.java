@@ -1,17 +1,23 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.*;
 class IET_GUI extends IET_COLLECTIONS{
     public static JFrame ADMIN_MENU = new JFrame("IET - Login");
     public static JFrame TRACK_MENU = new JFrame("IET - Tracking");
     public static JFrame DISPLAY_MENU = new JFrame("IET - Display");
-    static int GLOBAL_RES_WIDTH = 1024;
-    static int GLOBAL_RES_HEIGHT = 768;
+    static int GLOBAL_RES_WIDTH = 800;
+    static int GLOBAL_RES_HEIGHT = 600;
     static Color BSU_RED = new Color(237,28,36);
     static JFrame TEMP;
 
+    static JTable table = new JTable();
+    static JScrollPane scrollPane1;
     // Build the MainMenu panel including the elements inside
     public static void BUILD_FRAMES(){
+        InitStudents();
+        CollectListEntry(1);
         BUILD_ADMINMENU();
         BUILD_TRACKMENU();
         BUILD_DISPLAYMENU();
@@ -64,7 +70,7 @@ class IET_GUI extends IET_COLLECTIONS{
 
         JPanel TRACK = new JPanel();
         TRACK.setLayout(null);
-        TRACK.setBackground(BSU_RED);
+        // TRACK.setBackground(BSU_RED);
 
         TRACK_MENU.setJMenuBar(ADD_MENUBAR());
         TRACK_MENU.add(TRACK);
@@ -73,20 +79,37 @@ class IET_GUI extends IET_COLLECTIONS{
         DISPLAY_MENU.setSize(GLOBAL_RES_WIDTH, GLOBAL_RES_HEIGHT);
         DISPLAY_MENU.setResizable(false);
         DISPLAY_MENU.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    
-        JPanel DISPLAY = new JPanel();
-        DISPLAY.setLayout(null);
-    
+        
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.addColumn("#");
+        model.addColumn("SRCode");
+        model.addColumn("Date & Time");
+
+        scrollPane1 = new JScrollPane(table);
+        DISPLAY_MENU.add(scrollPane1);
+        
         DISPLAY_MENU.setJMenuBar(ADD_MENUBAR());
-        DISPLAY_MENU.add(DISPLAY);
     }
-    
+    public static void REFRESHTABLE(){   
+        if(!_entryTEMP.isEmpty()){
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.setRowCount(0);
+            for(int i = 0; i < _entryTEMP.size(); i++){
+                model.addRow(new Object[]{i+1,_entryTEMP.get(i).GetSRCODE(), _entryTEMP.get(i).GETDATE()});;
+            }
+        }
+    }
+
     public static JMenuBar ADD_MENUBAR(){
         JMenuBar MENUBAR = new JMenuBar();
         MENUBAR.setBackground(Color.gray);
         JMenu MB_ACTIONBAR = new JMenu("Actions");
         JMenuItem MB_TRACK = new JMenuItem("Track");
-        JMenuItem MB_DISPLAY = new JMenuItem("Display");
+        JMenu MB_DISPLAY = new JMenu("Display");
+        JMenuItem D_AM = new JMenuItem("Morning Entry");
+        JMenuItem D_PM = new JMenuItem("Afternoon Entry");
+        MB_DISPLAY.add(D_AM);
+        MB_DISPLAY.add(D_PM);
         JMenuItem MB_EXIT = new JMenuItem("Exit");
         
         MB_TRACK.addActionListener(new ActionListener() {
@@ -94,11 +117,20 @@ class IET_GUI extends IET_COLLECTIONS{
                 ACTIVATE_FRAMES(1);
             }
         });
-        MB_DISPLAY.addActionListener(new ActionListener() {
+
+        D_AM.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
+                CollectListEntry(1);
                 ACTIVATE_FRAMES(2);
             }
         });
+        D_PM.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                CollectListEntry(2);
+                ACTIVATE_FRAMES(2);
+            }
+        });
+        
         MB_EXIT.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 ACTIVATE_FRAMES(0);
@@ -122,6 +154,9 @@ class IET_GUI extends IET_COLLECTIONS{
         
         TEMP.dispose();
         if(frame_id != 0){
+            if(frame_id == 2){
+                REFRESHTABLE();
+            }
             TEMP = frame_id == 1 ? TRACK_MENU : DISPLAY_MENU;
             TEMP.setVisible(true);
         }else{
@@ -131,11 +166,9 @@ class IET_GUI extends IET_COLLECTIONS{
 
     public static Boolean ACCESS_ADMIN(String username_str, String password_str){
         Boolean access = false;
-        if(username_str.equals(GLOBAL_USERNAME)){
-            if(password_str.equals(GLOBAL_PASSWORD)){
-                access = true;
-                isAdmin = true;
-            }
+        if(username_str.equals(GLOBAL_USERNAME) && password_str.equals(GLOBAL_PASSWORD)){
+            access = true;
+            isAdmin = true;
         }
         return access;
     }
