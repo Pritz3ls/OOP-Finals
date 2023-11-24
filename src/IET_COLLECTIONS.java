@@ -12,7 +12,7 @@ public class IET_COLLECTIONS{
     // Testing Purposes
     static ArrayList<IET_Person> students = new ArrayList<IET_Person>();
 
-    public static void Add(int indx, String srcode){
+    public static void RecordEntry(int indx, String srcode){
         LocalDateTime curDATE = LocalDateTime.now();
         DateTimeFormatter formatDATE = DateTimeFormatter.ofPattern("E, MMM dd yyyy HH:mm:ss");
         String DATE = curDATE.format(formatDATE);
@@ -42,21 +42,20 @@ public class IET_COLLECTIONS{
         students.add(new IET_Person("Marlou Espenada", "2104", "24-13120"));
         students.add(new IET_Person("Cherysmond Montana", "2105", "34-50321"));
 
-        for(int i = 0; i < 3; i++){
-            Add(1, students.get(i).RetrieveSRCODE());
-        }
-        for(int i = 0; i < 30; i++){
-            Add(2, students.get(0).RetrieveSRCODE());
-        }
+        // for(int i = 0; i < 3; i++){
+        //     Add(1, students.get(i).RetrieveSRCODE());
+        // }
+        // for(int i = 0; i < 30; i++){
+        //     Add(2, students.get(0).RetrieveSRCODE());
+        // }
     }
 
     public static void CollectListEntry(int indx){
-        _entryTEMP.clear();
+        _entryTEMP.removeAll(_entryTEMP);
         if(indx == 1){
-            _entryTEMP = _entryAM;
+            _entryTEMP.addAll(_entryAM);
         }else if(indx == 2){
-            _entryTEMP = _entryPM;
+            _entryTEMP.addAll(_entryPM);
         }
-        System.out.println(_entryTEMP.size());
     }
 }

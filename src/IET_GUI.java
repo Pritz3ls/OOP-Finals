@@ -70,8 +70,43 @@ class IET_GUI extends IET_COLLECTIONS{
 
         JPanel TRACK = new JPanel();
         TRACK.setLayout(null);
-        // TRACK.setBackground(BSU_RED);
 
+        JLabel _srcodeLabel = new JLabel("SRCode: ");
+        JTextField _srcodeInput = new JTextField();
+        JButton _submitAM = new JButton("Record [AM]");
+        JButton _submitPM = new JButton("Record [PM]");
+        _submitAM.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(!VerifySRCODE(_srcodeInput.getText())){
+                    JOptionPane.showMessageDialog(_submitAM, "Invalid SRCode!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    RecordEntry(1,_srcodeInput.getText());
+                    _srcodeInput.setText("");
+                }
+            }
+        });
+        _submitPM.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(!VerifySRCODE(_srcodeInput.getText())){
+                    JOptionPane.showMessageDialog(_submitPM, "Invalid SRCode!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    RecordEntry(2,_srcodeInput.getText());
+                    _srcodeInput.setText("");
+                }
+            }
+        });
+
+        _srcodeLabel.setBounds(200,400,250,25);
+        _srcodeInput.setBounds(300,400,250,25);
+        _submitAM.setBounds(200, 450, 150,25);
+        _submitPM.setBounds(400, 450, 150,25);
+        
+        
+        TRACK.add(_srcodeInput);
+        TRACK.add(_srcodeLabel);
+        TRACK.add(_submitAM);
+        TRACK.add(_submitPM);
+        
         TRACK_MENU.setJMenuBar(ADD_MENUBAR());
         TRACK_MENU.add(TRACK);
     }
