@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Test",
+            "request": "launch",
+            "mainClass": "Test",
+            "projectName": "OOP-Finals_86c04dac"
+        },
+        {
+            "type": "java",
+            "name": "CoffeeShopOrderingSystem",
+            "request": "launch",
+            "mainClass": "CoffeeShopOrderingSystem",
+            "projectName": "OOP-Finals_86c04dac"
+        },
+        {
+            "type": "java",
             "name": "IET",
             "request": "launch",
             "mainClass": "IET",
