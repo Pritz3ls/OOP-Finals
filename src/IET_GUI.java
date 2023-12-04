@@ -16,7 +16,6 @@ class IET_GUI extends IET_COLLECTIONS{
     static JScrollPane scrollPane;
     // Build the MainMenu panel including the elements inside
     public static void BUILD_FRAMES(){
-        InitStudents();
         CollectListEntry(1);
         BUILD_ADMINMENU();
         BUILD_TRACKMENU();
@@ -102,8 +101,7 @@ class IET_GUI extends IET_COLLECTIONS{
                 if(!VerifySRCODE(_srcodeInput.getText())){
                     JOptionPane.showMessageDialog(TRACK, "Invalid SRCode!", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }else{
-                    RecordEntry(1,_srcodeInput.getText());
-                    JOptionPane.showMessageDialog(TRACK, "Tracked Successfully!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(TRACK, "Tracked Successfully!\n" + RecordEntry(1,_srcodeInput.getText()), "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
                     _srcodeInput.setText("");
                 }
             }
@@ -113,8 +111,7 @@ class IET_GUI extends IET_COLLECTIONS{
                 if(!VerifySRCODE(_srcodeInput.getText())){
                     JOptionPane.showMessageDialog(TRACK, "Invalid SRCode!", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }else{
-                    RecordEntry(2,_srcodeInput.getText());
-                    JOptionPane.showMessageDialog(TRACK, "Tracked Successfully!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(TRACK, "Tracked Successfully!\n" + RecordEntry(2,_srcodeInput.getText()), "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
                     _srcodeInput.setText("");
                 }
             }

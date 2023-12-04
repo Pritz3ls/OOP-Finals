@@ -11,11 +11,19 @@ public class IET_Person extends IET_VIOLATIONCODE{
         _FULLNAME = name;
         _SRCODE = srcode;
     }
+    
+    public String GetSRCode(){
+        return _SRCODE;
+    }
+    public String GetName(){
+        return _FULLNAME;
+    }
+    public String GetSection(){
+        return _SECTION;
+    }
+
     public void RecordViolation(int code){
         _VIOLATIONS.add(code);
-    }
-    public String RetrieveSRCODE(){
-        return _SRCODE;
     }
     public void RetrieveInfo(){
         System.out.println("NAME: " + _FULLNAME);
