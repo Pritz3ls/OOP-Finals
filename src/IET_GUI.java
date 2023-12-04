@@ -111,7 +111,7 @@ class IET_GUI extends IET_COLLECTIONS{
                 if(!VerifySRCODE(_srcodeInput.getText())){
                     JOptionPane.showMessageDialog(TRACK, "Invalid SRCode!", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }else{
-                    JOptionPane.showMessageDialog(TRACK, "Tracked Successfully!\n" + RecordEntry(2,_srcodeInput.getText()), "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showConfirmDialog(TRACK, "Tracked Successfully!\n" + RecordEntry(2,_srcodeInput.getText()), "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
                     _srcodeInput.setText("");
                 }
             }
