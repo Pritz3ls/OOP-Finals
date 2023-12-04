@@ -28,7 +28,9 @@ class IET_GUI extends IET_COLLECTIONS{
         ADMIN_MENU.setSize(new Dimension(360, 200));
         ADMIN_MENU.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ADMIN_MENU.setResizable(false);
-        ADMIN_MENU.addWindowListener(new WindowAdapter() {
+        Image icon = Toolkit.getDefaultToolkit().getImage("IET_Logo.png"); 
+        ADMIN_MENU.setIconImage(icon);
+        ADMIN_MENU.addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent WE) {
             int result = JOptionPane.showConfirmDialog(ADMIN_MENU,"Do you want to Exit ?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (result == JOptionPane.YES_OPTION)
@@ -76,6 +78,8 @@ class IET_GUI extends IET_COLLECTIONS{
         TRACK_MENU.setSize(640, 480);
         TRACK_MENU.setResizable(false);
         TRACK_MENU.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Image icon = Toolkit.getDefaultToolkit().getImage("IET_Logo.png"); 
+        TRACK_MENU.setIconImage(icon);
         TRACK_MENU.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent WE) {
             int result = JOptionPane.showConfirmDialog(TRACK_MENU,"Do you want to Exit ?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -134,6 +138,8 @@ class IET_GUI extends IET_COLLECTIONS{
         DISPLAY_MENU.setSize(GLOBAL_RES_WIDTH, GLOBAL_RES_HEIGHT);
         DISPLAY_MENU.setResizable(false);
         DISPLAY_MENU.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Image icon = Toolkit.getDefaultToolkit().getImage("IET_Logo.png"); 
+        DISPLAY_MENU.setIconImage(icon);
         DISPLAY_MENU.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent WE) {
                 int result = JOptionPane.showConfirmDialog(DISPLAY_MENU,"Do you want to Exit ?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
