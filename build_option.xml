@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
-  <headerType>console</headerType>
-  <jar>C:\Users\Admin\Desktop\IET\IET.jar</jar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\Admin\Desktop\OOP-Finals\OOP-Finals.jar</jar>
   <outfile>IET.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>

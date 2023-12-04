@@ -30,7 +30,7 @@ class IET_GUI extends IET_COLLECTIONS{
         ADMIN_MENU.setResizable(false);
         ADMIN_MENU.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent WE) {
-            int result = JOptionPane.showConfirmDialog(ADMIN_MENU,"Do you want to Exit ?", "", JOptionPane.YES_NO_OPTION);
+            int result = JOptionPane.showConfirmDialog(ADMIN_MENU,"Do you want to Exit ?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (result == JOptionPane.YES_OPTION)
                 ADMIN_MENU.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             else if (result == JOptionPane.NO_OPTION)
@@ -78,7 +78,7 @@ class IET_GUI extends IET_COLLECTIONS{
         TRACK_MENU.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         TRACK_MENU.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent WE) {
-            int result = JOptionPane.showConfirmDialog(TRACK_MENU,"Do you want to Exit ?", "", JOptionPane.YES_NO_OPTION);
+            int result = JOptionPane.showConfirmDialog(TRACK_MENU,"Do you want to Exit ?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (result == JOptionPane.YES_OPTION)
                 TRACK_MENU.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             else if (result == JOptionPane.NO_OPTION)
@@ -136,23 +136,24 @@ class IET_GUI extends IET_COLLECTIONS{
         DISPLAY_MENU.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         DISPLAY_MENU.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent WE) {
-            int result = JOptionPane.showConfirmDialog(DISPLAY_MENU,"Do you want to Exit ?", "", JOptionPane.YES_NO_OPTION);
-            if (result == JOptionPane.YES_OPTION)
-                DISPLAY_MENU.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            else if (result == JOptionPane.NO_OPTION)
-                DISPLAY_MENU.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                int result = JOptionPane.showConfirmDialog(DISPLAY_MENU,"Do you want to Exit ?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION)
+                    DISPLAY_MENU.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                else if (result == JOptionPane.NO_OPTION)
+                    DISPLAY_MENU.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                }
             }
-        });
+        );
 
         JPanel panel = new JPanel();
         JPanel savePanel = new JPanel();
-        JLabel LBL_save = new JLabel("Save Records?");
+        JLabel LBL_save = new JLabel("Action?");
         JButton BTN_SaveRecord = new JButton("Save Records");
         JButton BTN_ClearRecord = new JButton("Clear Records");
         
         BTN_SaveRecord.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                int result = JOptionPane.showConfirmDialog(panel, "You want to save all the records?", "Warning!", JOptionPane.YES_NO_OPTION ,JOptionPane.QUESTION_MESSAGE);
+                int result = JOptionPane.showConfirmDialog(panel, "You want to save these records?", "Warning!", JOptionPane.YES_NO_OPTION ,JOptionPane.QUESTION_MESSAGE);
                 if(result == JOptionPane.YES_OPTION){
                     SaveFile();
                     JOptionPane.showMessageDialog(DISPLAY_MENU, "Records saved Successfully! Check inside the data folder", "Success!", JOptionPane.INFORMATION_MESSAGE);
@@ -163,7 +164,7 @@ class IET_GUI extends IET_COLLECTIONS{
         });
         BTN_ClearRecord.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                int result = JOptionPane.showConfirmDialog(panel, "Are you sure you want to delete all records?", "Warning!", JOptionPane.YES_NO_OPTION ,JOptionPane.QUESTION_MESSAGE);
+                int result = JOptionPane.showConfirmDialog(panel, "Are you sure you want to delete these records?", "Warning!", JOptionPane.YES_NO_OPTION ,JOptionPane.QUESTION_MESSAGE);
                 if(result == JOptionPane.YES_OPTION){
                     DeleteRecord();
                     REFRESHTABLE();
@@ -208,6 +209,7 @@ class IET_GUI extends IET_COLLECTIONS{
         JMenu MB_ACTIONBAR = new JMenu("Actions");
         JMenuItem MB_TRACK = new JMenuItem("Track");
         JMenu MB_DISPLAY = new JMenu("Display");
+        JMenuItem MB_RESET = new JMenuItem("Reset All");
         JMenuItem D_AM = new JMenuItem("Morning Entry");
         JMenuItem D_PM = new JMenuItem("Afternoon Entry");
         MB_DISPLAY.add(D_AM);
@@ -219,7 +221,6 @@ class IET_GUI extends IET_COLLECTIONS{
                 ACTIVATE_FRAMES(1);
             }
         });
-
         D_AM.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 CollectListEntry(1);
@@ -232,15 +233,33 @@ class IET_GUI extends IET_COLLECTIONS{
                 ACTIVATE_FRAMES(2);
             }
         });
-        
+        MB_RESET.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                int resultA = JOptionPane.showConfirmDialog(TEMP,"Do you want to reset all the records?", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (resultA == JOptionPane.YES_OPTION){
+                    int resultB = JOptionPane.showConfirmDialog(TEMP,"Are you really sure?", "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (resultB == JOptionPane.YES_OPTION){
+                        DeleteAllRecord();
+                        if(TEMP == DISPLAY_MENU){REFRESHTABLE();}
+                        JOptionPane.showMessageDialog(DISPLAY_MENU, "All records have been deleted!", "Delete successfully", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            }
+        });
         MB_EXIT.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                ACTIVATE_FRAMES(0);
+                int result = JOptionPane.showConfirmDialog(TEMP,"Do you want to Exit ?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION){
+                    System.exit(0);
+                }else if (result == JOptionPane.NO_OPTION){
+                    // Do nothing
+                }
             }
         });
 
         MB_ACTIONBAR.add(MB_TRACK);
         MB_ACTIONBAR.add(MB_DISPLAY);
+        MB_ACTIONBAR.add(MB_RESET);
         MB_ACTIONBAR.add(MB_EXIT);
         
         MENUBAR.add(MB_ACTIONBAR);
@@ -261,10 +280,7 @@ class IET_GUI extends IET_COLLECTIONS{
             }
             TEMP = frame_id == 1 ? TRACK_MENU : DISPLAY_MENU;
             TEMP.setVisible(true);
-        }else{
-            System.exit(0);
         }
-
     }
 
     public static Boolean ACCESS_ADMIN(String username_str, String password_str){

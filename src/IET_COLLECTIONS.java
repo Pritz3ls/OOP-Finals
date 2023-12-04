@@ -36,6 +36,11 @@ public class IET_COLLECTIONS extends IET_FileWrite{
             _entryPM.removeAll(_entryPM);
         }
     }
+    public static void DeleteAllRecord(){
+        _entryTEMP.removeAll(_entryTEMP);
+        _entryAM.removeAll(_entryAM);
+        _entryPM.removeAll(_entryPM);
+    }
     public static void SaveFile(){
         LocalDate localdate = LocalDate.now();
         String FILENAME = "data//";
