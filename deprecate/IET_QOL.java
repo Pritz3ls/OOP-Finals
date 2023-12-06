@@ -1,3 +1,6 @@
+/* Deprecated codce base, only used for efficiency in
+ * Console applications, used in early buids of IET
+*/
 public class IET_QOL{
     public static void IET_PrintWithLine(String MOTD, String symbol, int width){
         for(int i = 0; i < width; i++){

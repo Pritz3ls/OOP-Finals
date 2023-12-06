@@ -56,15 +56,4 @@ public class IET_FileWrite{
         File checkFile = new File("data//info//" + SRCODE + ".txt");
         return checkFile.exists();
     }
-    public static void INFO_WRITE_Test(String pathname, String data){
-        try {
-            FileWriter myWriter = new FileWriter(pathname);
-            myWriter.write(data);
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        }catch(IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
 }
